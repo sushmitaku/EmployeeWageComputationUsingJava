@@ -11,20 +11,22 @@ public class EmployeeWageComputation {
 	switch (randomValue)
 	{
 	case 2:
-            System.out.println("DailyEmployeeWageForFullTime="+employeeWage(FullDayHour));
+            System.out.println("MonthEmployeeWageForFullTime="+employeeWage(FullDayHour));
 		break;
 	case 1:
-            System.out.println("DailyEmployeeWageForHalfTime="+employeeWage(HalfDayHour));
+            System.out.println("MonthEmployeeWageForHalfTime="+employeeWage(HalfDayHour));
 		break;
         default:
-            System.out.println("DailyEmployeeWage=  0");
+            System.out.println(" Employee Absent MonthEmployeeWage=  0");
 		break;
         }
     }
 	public static int employeeWage(int hours)
     {
         int WagePerHour=20;
+	int TotalWorkingDayInMonth=20;
         int DailyEmployeeWage=WagePerHour*hours;
-        return DailyEmployeeWage;
+	int MonthWage=TotalWorkingDayInMonth*DailyEmployeeWage;
+        return MonthWage;
     }
 }
