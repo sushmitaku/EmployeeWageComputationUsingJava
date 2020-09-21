@@ -4,12 +4,19 @@ import java.math.*;
 public class EmployeeWageComputation {
     public static void main(String args[])
     {
+	int WagePerHour = 20, FullDayHour = 8, DailyEmployeeWage;
         int maximum=1,minimum=0;
         int present=1,absent=0;
         int randomValue=(int)(Math.random() * (maximum - minimum + 1) + minimum);
-        if(randomValue==present)
+        if(randomValue==present){
             System.out.println("Employee Present");
-        else
+	    DailyEmployeeWage = WagePerHour * FullDayHour;
+            System.out.println("DailyEmployeeWage="+DailyEmployeeWage);
+	}
+        else{
             System.out.println("Employee Absent");
+	    DailyEmployeeWage = 0;
+            System.out.println("DailyEmployeeWage="+DailyEmployeeWage);
+        }
     }
 }
