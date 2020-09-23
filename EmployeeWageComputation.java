@@ -3,32 +3,32 @@ import java.util.*;
 import java.math.*;
 public class EmployeeWageComputation
 {
-    public static void main(String args[])
-    {
-	int DailyEmployeeWage,FullDayHour,HalfDayHour,Hour,WorkingDay=20;
-        int Maximum=2,Minimum=0;
-	int PresentHour=0,GivenHour=100,Day=1;
-	int IsFullTime=2,IsPartTime=1,DailyHour,WagePerHour=20,i=0;
-        Map<Integer, Integer> DailyWage = new HashMap<Integer, Integer>();
-        Map<Integer, Integer> TotalWage = new HashMap<Integer, Integer>();
-	while( PresentHour<=GivenHour && Day<=WorkingDay)
-	{
-		 int randomValue=(int)(Math.random() * (Maximum - Minimum + 1) + Minimum);
-	 	 DailyHour=(getHours(randomValue));
-	 	 DailyWage.put(i, WagePerHour * DailyHour);
-	 	 PresentHour=PresentHour+DailyHour;
-		 TotalWage.put(i, PresentHour * WagePerHour);
-            	 Day++;
-            	 i++;
-	}
-	System.out.println("Day  DailyWage");
-        displayWage(DailyWage);
-        System.out.println("Day TotalWage");
-        displayWage(TotalWage);
-     }
-	public static void displayWage( Map<Integer, Integer>WageCalculate)
+	int dailyEmployeeWage,workingDay=20;
+        int maximum=2,minimum=0;
+	int presentHour=0,givenHour=100,day=1;
+	int isFullTime=2,isPartTime=1,dailyHour,wagePerHour=20,i=0;
+        Map<Integer, Integer> dailyWage = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> totalWage = new HashMap<Integer, Integer>();
+	public void wageCalculate( )
         {
-        	for(Map.Entry entry:WageCalculate.entrySet())
+		while( presentHour<=givenHour && day<=workingDay)
+		{
+			int randomValue=(int)(Math.random() * (maximum - minimum + 1) + minimum);
+	 	 	dailyHour=(getHours(randomValue));
+	 	 	dailyWage.put(i, wagePerHour * dailyHour);
+	 	 	presentHour=presentHour+dailyHour;
+		 	totalWage.put(i, presentHour * wagePerHour);
+            	 	day++;
+            	 	i++;
+		}
+	System.out.println("Day  DailyWage");
+        displayWage(dailyWage);
+        System.out.println("Day TotalWage");
+        displayWage(totalWage);
+        }
+	public static void displayWage( Map<Integer, Integer>dailyTotalWage)
+        {
+        	for(Map.Entry entry:dailyTotalWage.entrySet())
         	{
             	System.out.println(entry.getKey()+"   "+entry.getValue()+" ");
 
@@ -38,16 +38,20 @@ public class EmployeeWageComputation
 	public static int getHours(int randomValue)
 	{
 
-		int FullDayHour,HalfDayHour,Hour;
+		int fullDayHour,halfDayHour,hour;
 		switch (randomValue)
 		{
 		case 2:
-            	return(FullDayHour=16);
+            	return(fullDayHour=16);
 		case 1:
-            	return(HalfDayHour=8);
+            	return(halfDayHour=8);
         	default:
-            	return(Hour=0);
+            	return(hour=0);
         	}
         }
-
+	public static void main(String args[])
+	{
+		EmployeeWageComputation object=new EmployeeWageComputation();
+		object.wageCalculate();
+	}
 }
