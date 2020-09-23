@@ -3,37 +3,34 @@ import java.util.*;
 import java.math.*;
 public class EmployeeWageComputation
 {
+	String companyName;
+        int wagePerHour,workingDay,totalHourOfMonth,size;
         int maximum=2,minimum=0;
+	StringBuilder empWage=new StringBuilder();
 	int presentHour=0,day;
+	int addTotalWage;
 	int isFullTime=2,isPartTime=1,dailyHour,i;
         Map<Integer, Integer> dailyWage = new HashMap<Integer, Integer>();
         Map<Integer, Integer> totalWage = new HashMap<Integer, Integer>();
-	public void wageCalculate(int wagePerHour, int workingDay, int givenHour )
+	public void wageCalculate( )
         {
-		 i=0;day=1;
-		while( presentHour<=givenHour && day<=workingDay)
+		 i=0;day=1;addTotalWage=0;
+		while( presentHour<=totalHourOfMonth && day<=workingDay)
 		{
 			int randomValue=(int)(Math.random() * (maximum - minimum + 1) + minimum);
 	 	 	dailyHour=(getHours(randomValue));
 	 	 	dailyWage.put(i, wagePerHour * dailyHour);
 	 	 	presentHour=presentHour+dailyHour;
 		 	totalWage.put(i, presentHour * wagePerHour);
+			addTotalWage=addTotalWage+(wagePerHour*dailyHour);
             	 	day++;
             	 	i++;
 		}
-		System.out.println("Day  DailyWage");
-        	displayWage(dailyWage);
-        	System.out.println("Day TotalWage");
-        	displayWage(totalWage);
+		empWage.append(addTotalWage);
         }
-	public static void displayWage( Map<Integer, Integer>dailyTotalWage)
+	 public void wagePrint()
         {
-        	for(Map.Entry entry:dailyTotalWage.entrySet())
-        	{
-            	System.out.println(entry.getKey()+"   "+entry.getValue()+" ");
-
-        	}
-
+                System.out.println(empWage);
         }
 	public static int getHours(int randomValue)
 	{
@@ -51,18 +48,18 @@ public class EmployeeWageComputation
         }
 	public static void main(String args[])
 	{
-		EmployeeWageComputation tcs=new EmployeeWageComputation();
-        	System.out.println("--------TCS------------");
-        	tcs.wageCalculate(20,20,100);
-        	System.out.println("--------BridgeLabz---------");
-        	EmployeeWageComputation bridgeLabz=new EmployeeWageComputation();
-        	bridgeLabz.wageCalculate(30,24,120);
-        	System.out.println("---------Oracle----------");
-        	EmployeeWageComputation oracle=new EmployeeWageComputation();
-        	oracle.wageCalculate(40,20,150);
-        	System.out.println("---------Microsoft-----------");
-        	EmployeeWageComputation microsoft=new EmployeeWageComputation();
-        	microsoft.wageCalculate(60,22,160);
+	    	EmployeeWageComputation object = new EmployeeWageComputation();
+            	Scanner input = new Scanner(System.in);
+            	System.out.println("Enter Company Name");
+            	object.companyName = input.nextLine();
+            	System.out.println(" Enter Wage Per Hour");
+            	object.wagePerHour = input.nextInt();
+            	System.out.println("Enter Working Day");
+            	object.workingDay = input.nextInt();
+            	System.out.println(" Enter Total working Hour of month");
+            	object.totalHourOfMonth = input.nextInt();
+            	object.wageCalculate();
+           	object.wagePrint();
 
 	}
 }
