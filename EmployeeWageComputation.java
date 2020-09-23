@@ -3,14 +3,14 @@ import java.util.*;
 import java.math.*;
 public class EmployeeWageComputation
 {
-	int dailyEmployeeWage,workingDay=20;
         int maximum=2,minimum=0;
-	int presentHour=0,givenHour=100,day=1;
-	int isFullTime=2,isPartTime=1,dailyHour,wagePerHour=20,i=0;
+	int presentHour=0,day;
+	int isFullTime=2,isPartTime=1,dailyHour,i;
         Map<Integer, Integer> dailyWage = new HashMap<Integer, Integer>();
         Map<Integer, Integer> totalWage = new HashMap<Integer, Integer>();
-	public void wageCalculate( )
+	public void wageCalculate(int wagePerHour, int workingDay, int givenHour )
         {
+		 i=0;day=1;
 		while( presentHour<=givenHour && day<=workingDay)
 		{
 			int randomValue=(int)(Math.random() * (maximum - minimum + 1) + minimum);
@@ -21,10 +21,10 @@ public class EmployeeWageComputation
             	 	day++;
             	 	i++;
 		}
-	System.out.println("Day  DailyWage");
-        displayWage(dailyWage);
-        System.out.println("Day TotalWage");
-        displayWage(totalWage);
+		System.out.println("Day  DailyWage");
+        	displayWage(dailyWage);
+        	System.out.println("Day TotalWage");
+        	displayWage(totalWage);
         }
 	public static void displayWage( Map<Integer, Integer>dailyTotalWage)
         {
@@ -51,7 +51,18 @@ public class EmployeeWageComputation
         }
 	public static void main(String args[])
 	{
-		EmployeeWageComputation object=new EmployeeWageComputation();
-		object.wageCalculate();
+		EmployeeWageComputation tcs=new EmployeeWageComputation();
+        	System.out.println("--------TCS------------");
+        	tcs.wageCalculate(20,20,100);
+        	System.out.println("--------BridgeLabz---------");
+        	EmployeeWageComputation bridgeLabz=new EmployeeWageComputation();
+        	bridgeLabz.wageCalculate(30,24,120);
+        	System.out.println("---------Oracle----------");
+        	EmployeeWageComputation oracle=new EmployeeWageComputation();
+        	oracle.wageCalculate(40,20,150);
+        	System.out.println("---------Microsoft-----------");
+        	EmployeeWageComputation microsoft=new EmployeeWageComputation();
+        	microsoft.wageCalculate(60,22,160);
+
 	}
 }
