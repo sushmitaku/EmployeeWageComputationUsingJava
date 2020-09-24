@@ -1,18 +1,26 @@
 //"Welcome To Employee Wage Computation Program On Master Branch"
 import java.util.*;
 import java.math.*;
-public class EmployeeWageComputation
+class EmployeeWage
 {
-	String companyName;
+	String company;
         int wagePerHour,workingDay,totalHourOfMonth,size;
         int maximum=2,minimum=0;
 	StringBuilder empWage=new StringBuilder();
+	StringBuilder companyName=new StringBuilder();
 	int presentHour=0,day;
 	int addTotalWage;
 	int isFullTime=2,isPartTime=1,dailyHour,i;
         Map<Integer, Integer> dailyWage = new HashMap<Integer, Integer>();
         Map<Integer, Integer> totalWage = new HashMap<Integer, Integer>();
-	public void wageCalculate( )
+	 EmployeeWage( String companyName,int wagePerHour,int workingDay,int totalHourOfMonth)
+        {
+		company=companyName;
+        	this.wagePerHour=wagePerHour;
+        	this.workingDay=workingDay;
+        	this.totalHourOfMonth=totalHourOfMonth;
+        }
+	public void wageCalculate()
         {
 		 i=0;day=1;addTotalWage=0;
 		while( presentHour<=totalHourOfMonth && day<=workingDay)
@@ -27,11 +35,18 @@ public class EmployeeWageComputation
             	 	i++;
 		}
 		empWage.append(addTotalWage);
+		companyName.append(company);
+		wage();
         }
-	 public void wagePrint()
+	 public void wage()
         {
+        	company();
                 System.out.println(empWage);
         }
+	public void company()
+	{
+		System.out.println(companyName);
+	}
 	public static int getHours(int randomValue)
 	{
 
@@ -46,20 +61,20 @@ public class EmployeeWageComputation
             	return(hour=0);
         	}
         }
-	public static void main(String args[])
+
+}
+class EmployeeWageComputation
+{
+	public static void main (String args[])
 	{
-	    	EmployeeWageComputation object = new EmployeeWageComputation();
-            	Scanner input = new Scanner(System.in);
-            	System.out.println("Enter Company Name");
-            	object.companyName = input.nextLine();
-            	System.out.println(" Enter Wage Per Hour");
-            	object.wagePerHour = input.nextInt();
-            	System.out.println("Enter Working Day");
-            	object.workingDay = input.nextInt();
-            	System.out.println(" Enter Total working Hour of month");
-            	object.totalHourOfMonth = input.nextInt();
-            	object.wageCalculate();
-           	object.wagePrint();
+		 EmployeeWage storeCompanyOne = new EmployeeWage("Tcs",20,20,100);
+		 storeCompanyOne.wageCalculate();
+                 EmployeeWage storeCompanyTwo = new EmployeeWage("oracle",30,22,120);
+                 storeCompanyTwo.wageCalculate();
+		 EmployeeWage storeCompanyThree = new EmployeeWage("Tcs",40,23,140);
+                 storeCompanyThree.wageCalculate();
+
+
 
 	}
 }
