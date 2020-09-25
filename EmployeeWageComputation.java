@@ -1,80 +1,68 @@
 //"Welcome To Employee Wage Computation Program On Master Branch"
 import java.util.*;
 import java.math.*;
-class EmployeeWage
+class EmployeeWage implements EmployeeWageBuilder
 {
-	String company;
-        int wagePerHour,workingDay,totalHourOfMonth,size;
-        int maximum=2,minimum=0;
-	StringBuilder empWage=new StringBuilder();
-	StringBuilder companyName=new StringBuilder();
+        int maximum=1,minimum=0;
 	int presentHour=0,day;
 	int addTotalWage;
-	int isFullTime=2,isPartTime=1,dailyHour,i;
+	int i;
         Map<Integer, Integer> dailyWage = new HashMap<Integer, Integer>();
         Map<Integer, Integer> totalWage = new HashMap<Integer, Integer>();
-	 EmployeeWage( String companyName,int wagePerHour,int workingDay,int totalHourOfMonth)
-        {
-		company=companyName;
-        	this.wagePerHour=wagePerHour;
-        	this.workingDay=workingDay;
-        	this.totalHourOfMonth=totalHourOfMonth;
-        }
-	public void wageCalculate()
+	public void employeeWageBuilder(String companyName,int wagePerHour,int halfDay,int fullDay,int totalHourOfMonth,int workingDay)
         {
 		 i=0;day=1;addTotalWage=0;
 		while( presentHour<=totalHourOfMonth && day<=workingDay)
 		{
 			int randomValue=(int)(Math.random() * (maximum - minimum + 1) + minimum);
-	 	 	dailyHour=(getHours(randomValue));
-	 	 	dailyWage.put(i, wagePerHour * dailyHour);
-	 	 	presentHour=presentHour+dailyHour;
-		 	totalWage.put(i, presentHour * wagePerHour);
-			addTotalWage=addTotalWage+(wagePerHour*dailyHour);
-            	 	day++;
-            	 	i++;
+			if(randomValue==1)
+			{
+	 	 		dailyWage.put(i, wagePerHour * fullDay);
+	 	 		presentHour=presentHour+fullDay;
+		 		totalWage.put(i, presentHour * wagePerHour);
+				addTotalWage=wagePerHour*presentHour;
+            	 		day++;
+				i++;
+            	 	}
+			else
+			{
+				dailyWage.put(i, wagePerHour * halfDay);
+                                presentHour=presentHour+halfDay;
+                                totalWage.put(i, presentHour * wagePerHour);
+                                addTotalWage=wagePerHour*presentHour;
+                                day++;
+                                i++;
+			}
 		}
-		empWage.append(addTotalWage);
-		companyName.append(company);
 		wage();
         }
 	 public void wage()
         {
-        	company();
-                System.out.println(empWage);
+                System.out.println("Total wage of your Company  "+addTotalWage);
         }
-	public void company()
-	{
-		System.out.println(companyName);
-	}
-	public static int getHours(int randomValue)
-	{
-
-		int fullDayHour,halfDayHour,hour;
-		switch (randomValue)
-		{
-		case 2:
-            	return(fullDayHour=16);
-		case 1:
-            	return(halfDayHour=8);
-        	default:
-            	return(hour=0);
-        	}
-        }
-
+}
+interface EmployeeWageBuilder
+{
+	 abstract void employeeWageBuilder(String companyName,int wagePerHour,int halfDay,int fullDay,int totalHourOfMonth,int workingDay);
 }
 class EmployeeWageComputation
 {
 	public static void main (String args[])
 	{
-		 EmployeeWage storeCompanyOne = new EmployeeWage("Tcs",20,20,100);
-		 storeCompanyOne.wageCalculate();
-                 EmployeeWage storeCompanyTwo = new EmployeeWage("oracle",30,22,120);
-                 storeCompanyTwo.wageCalculate();
-		 EmployeeWage storeCompanyThree = new EmployeeWage("Tcs",40,23,140);
-                 storeCompanyThree.wageCalculate();
-
-
-
+		EmployeeWage object = new EmployeeWage();
+		Scanner input = new Scanner(System.in);
+            	System.out.println("Enter Company Name");
+            	String companyName = input.nextLine();
+            	System.out.println(" Enter Wage Per Hour");
+            	int wagePerHour = input.nextInt();
+            	System.out.println("Enter half Day");
+            	int halfDay = input.nextInt();
+            	System.out.println(" Enter full day");
+            	int fullDay = input.nextInt();
+		System.out.println("Total hour of month");
+                int totalHourOfMonth = input.nextInt();
+                System.out.println(" working day");
+                int workingDay = input.nextInt();
+		object.employeeWageBuilder(companyName,wagePerHour,halfDay,fullDay,totalHourOfMonth,workingDay);
 	}
 }
