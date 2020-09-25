@@ -11,7 +11,7 @@ class EmployeeWage implements EmployeeWageBuilder
         Map<Integer, Integer> totalWage = new HashMap<Integer, Integer>();
 	public void employeeWageBuilder(String companyName,int wagePerHour,int halfDay,int fullDay,int totalHourOfMonth,int workingDay)
         {
-		 i=0;day=1;addTotalWage=0;
+		 i=1;day=1;addTotalWage=0;
 		while( presentHour<=totalHourOfMonth && day<=workingDay)
 		{
 			int randomValue=(int)(Math.random() * (maximum - minimum + 1) + minimum);
@@ -34,11 +34,25 @@ class EmployeeWage implements EmployeeWageBuilder
                                 i++;
 			}
 		}
+		System.out.println("Day      DailyWage");
+            	displayWage(dailyWage);
+            	System.out.println("Day      TotalWage");
+            	displayWage(totalWage);
 		wage();
         }
+	public void displayWage( Map<Integer, Integer>WageCalculate)
+        {
+        	for(Map.Entry entry:WageCalculate.entrySet())
+        	{
+                	System.out.println(entry.getKey()+"  ----->    "+entry.getValue()+" ");
+
+        	}
+
+    	}
 	 public void wage()
         {
                 System.out.println("Total wage of your Company  "+addTotalWage);
+		System.out.println("Thank you !");
         }
 }
 interface EmployeeWageBuilder
@@ -50,18 +64,20 @@ class EmployeeWageComputation
 	public static void main (String args[])
 	{
 		EmployeeWage object = new EmployeeWage();
+		System.out.println("*------Welcome To Employee Wage Computation-------*");
+		System.out.println();
 		Scanner input = new Scanner(System.in);
             	System.out.println("Enter Company Name");
             	String companyName = input.nextLine();
             	System.out.println(" Enter Wage Per Hour");
             	int wagePerHour = input.nextInt();
-            	System.out.println("Enter half Day");
+            	System.out.println("Enter half Working Hour");
             	int halfDay = input.nextInt();
-            	System.out.println(" Enter full day");
+            	System.out.println(" Enter full Working hour");
             	int fullDay = input.nextInt();
 		System.out.println("Total hour of month");
                 int totalHourOfMonth = input.nextInt();
-                System.out.println(" working day");
+                System.out.println(" Working day In Month");
                 int workingDay = input.nextInt();
 		object.employeeWageBuilder(companyName,wagePerHour,halfDay,fullDay,totalHourOfMonth,workingDay);
 	}
